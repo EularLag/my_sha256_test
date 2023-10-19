@@ -21,8 +21,10 @@ extern WORD K[64];
 
 typedef struct _sha256_ctx
 {
-    WORD h[8];
+    WORD a,b,c,d,e,f,g,h;
+    WORD reg[8];
     WORD w[64];
+    int round;
 }SHA256_CTX;
 
 void sha256_init(SHA256_CTX& ctx);
@@ -34,6 +36,8 @@ void sha256_round_test(SHA256_CTX &ctx, WORD *msg_blk, int round);
 void sha256_update(SHA256_CTX& ctx, unsigned char* msg, int msg_len);
 
 void sha256_restet(SHA256_CTX& ctx);
+
+void sha256_one_round(SHA256_CTX& ctx, WORD *msg_blk);
 
 void msg_padding(unsigned char* in, int in_len, WORD* out, int out_len);
 
